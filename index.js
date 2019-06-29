@@ -33,6 +33,7 @@ app.use(helmet());
 //Configures the express-session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
+  superSecret: process.env.SUPER_SECRET,
   resave: false,
   saveUninitialized: true,
   store: sessionStore
