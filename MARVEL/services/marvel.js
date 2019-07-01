@@ -11,17 +11,20 @@ function Marvel(request) {
 }
 
 Marvel.prototype.findAllCharacters = function(request) {
-//Request Method: GET
-var query = query.stringify({
-  apikey: this.publicKey,
-  ts: ts,
-  hash: this._createHash(ts);
-  limit: limit,
-  offset: offset
-});
-Headers: {
-  Accept: */*
-}
+  request = request || {};
+  var ts = this.timestamp();
+  var limit = typeof request.limit !== 'undefined' ? request.limit : 20;
+  var offset = typeof request.limit !== 'undefined' ? request.limit : 0;
+
+  //Request Method: GET
+  var query = JSON.stringify({
+    apikey: this.publicKey,
+    ts: ts,
+    hash: this._createHash(ts),
+    limit: limit,
+    offset: offset
+  });
+  var url = 'http://gateway.marvel.com/v1/public/characters?' + query;
 
 
 
