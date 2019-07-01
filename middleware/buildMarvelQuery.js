@@ -1,7 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 const md5 = require('md5');
 const publicKey = process.env.PUBLIC_HERO_KEY;
-const privateKey = process.env.SUPER_HERO_SECRET_KEY 
+const privateKey = process.env.SUPER_HERO_SECRET_KEY; 
 
 function buildMarvelQuery() {
   let baseUrl = 'http://gateway.marvel.com/v1/public/comics';

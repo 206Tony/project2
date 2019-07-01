@@ -3,6 +3,8 @@ const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
 //Calls API
 const axios = require('axios');
+//
+const async = require('async');
 //Hash generator
 const md5 = require('md5');
 //Module allows use of sessions
@@ -35,6 +37,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
 
+app.use('/marvel', require('./routes/marvel'));
+
 app.get('/', function(req, res) {
   var url = buildMarvelQuery();
   axios.get(url).then( apiResponse => {
@@ -45,7 +49,6 @@ app.get('/', function(req, res) {
   }).catch( err => res.json(err))
 });
  
-
 //Configures the express-session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
