@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
+const axios = require('axios');
+const marvel = require('../middleware/marvel-midware');
 //Module allows use of sessions
 const session = require('express-session');
 //import passport local strategy
@@ -9,8 +11,6 @@ const passport = require('./config/passportConfig');
 const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
-const marvel = require('marvel');
-const axios = require('axios');
 //this is only used by session store
 const db = require('./models');
 
@@ -24,9 +24,9 @@ const sessionStore = new SequelizeStore({
   expiration: 1000 * 60 * 30
 });
 
-
 app.set('view engine', 'ejs');
 
+app.use(marvel());
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
@@ -36,7 +36,6 @@ app.use(helmet());
 //Configures the express-session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  superSecret: process.env.SUPER_SECRET_KEY,
   resave: false,
   saveUninitialized: true,
   store: sessionStore
@@ -60,13 +59,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.get('/', function(req, res) {
-//   var marvelUrl = "http://gateway.marvel.com/v1/public/characters/?apikey=" + PUBLIC_HERO_KEY;GET /v1/public/characters
-//   axios.get(marvelUrl).then(function(apiResponse) {
-//     var marvel = apiResponse.data;
-//     res.render('index', { marvel: marvel(parseInt(req.params.marvel))})
-//   });
-// });
+app.get('/', function(req, res) {
+  res.render('index');
+});
 
 app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
@@ -78,13 +73,6 @@ var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
 
-
-
-
-
-
-// GET characters
-//https://gateway.marvel.com:443/v1/public/characters?name=thanos&apikey=1ac2eed0e222ceee3a62e721648d0627
 
 
 
