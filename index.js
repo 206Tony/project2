@@ -3,7 +3,6 @@ const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
 //Calls API
 const axios = require('axios');
-//
 const async = require('async');
 //Hash generator
 const md5 = require('md5');
@@ -37,14 +36,12 @@ app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
 
-app.use('/marvel', require('./routes/marvel'));
+//app.use('/marvel', require('./routes/marvel'));
 
 app.get('/', function(req, res) {
   var url = buildMarvelQuery();
   axios.get(url).then( apiResponse => {
     var character = apiResponse.data;
-    console.log("STUFF STUFF STUFF", character);
-    //res.json(character)
     res.render('index', {character});  
   }).catch( err => res.json(err))
 });
