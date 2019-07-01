@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
+//Calls API
 const axios = require('axios');
-const marvel = require('../middleware/marvel-midware');
+//Hash generator
+const md5 = require('md5');
 //Module allows use of sessions
 const session = require('express-session');
 //import passport local strategy
@@ -24,14 +26,45 @@ const sessionStore = new SequelizeStore({
   expiration: 1000 * 60 * 30
 });
 
+
 app.set('view engine', 'ejs');
 
-app.use(marvel());
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
+
+// app.use(md5(function(message) {message.HASH}));
+
+function marvel(request) {
+  this.publicKey = process.env.PUBLIC_HERO_KEY || '';
+  this.privateKey = process.env.SUPER_SECRECT_HERO_KEY || '';
+}
+
+axios.get(function(character) {
+  //request = characters || {};
+  var ts = new Date();
+  var limit = 20;
+  var offset = 0;
+
+  //Request Method: GET
+  var query = {
+    ts: ts,
+    apikey: process.env.PUBLIC_HERO_KEY,
+    hash: ts + process.env.SUPER_HERO_SECRET_KEY + process.env.PUBLIC_HERO_KEY,        
+    limit: limit,
+    offset: offset
+  };
+  fs.readFile('hash', function(err, hash) {
+    console.log(md5(hash));
+  });
+  var url = ('http://gateway.marvel.com/v1/public/characters?' + query);
+  console.log("this is an object");
+  axios.get(url).then( data => {
+    res.render('index');  
+  })
+}); 
 
 //Configures the express-session middleware
 app.use(session({
