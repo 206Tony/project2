@@ -15,7 +15,7 @@ const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 //this is only used by session store
 const db = require('./models');
-
+const buildMarvelQuery = require('./middleware/buildMarvelQuery');
 const app = express();
 
 //This line makes the session use sequelize to write session data to postgres table
@@ -35,36 +35,16 @@ app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
 
-// app.use(md5(function(message) {message.HASH}));
-
-function marvel(request) {
-  this.publicKey = process.env.PUBLIC_HERO_KEY || '';
-  this.privateKey = process.env.SUPER_SECRECT_HERO_KEY || '';
-}
-
-axios.get(function(character) {
-  //request = characters || {};
-  var ts = new Date();
-  var limit = 20;
-  var offset = 0;
-
-  //Request Method: GET
-  var query = {
-    ts: ts,
-    apikey: process.env.PUBLIC_HERO_KEY,
-    hash: ts + process.env.SUPER_HERO_SECRET_KEY + process.env.PUBLIC_HERO_KEY,        
-    limit: limit,
-    offset: offset
-  };
-  fs.readFile('hash', function(err, hash) {
-    console.log(md5(hash));
-  });
-  var url = ('http://gateway.marvel.com/v1/public/characters?' + query);
-  console.log("this is an object");
-  axios.get(url).then( data => {
-    res.render('index');  
-  })
-}); 
+app.get('/', function(req, res) {
+  var url = buildMarvelQuery();
+  axios.get(url).then( apiResponse => {
+    var character = apiResponse.data;
+    console.log("STUFF STUFF STUFF", character);
+    //res.json(character)
+    res.render('index', {character});  
+  }).catch( err => res.json(err))
+});
+ 
 
 //Configures the express-session middleware
 app.use(session({
