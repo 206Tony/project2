@@ -2,30 +2,27 @@
 
 <p>Hello, <%= currentUser.name %></p>
 
+<div class="characters">
   <% characters.forEach(function(character) { %>
-    <div class="well">
-      <h2><a href='#'><%= character.name %> </h2>
-      <% if (comic.images.length > 0) { %>
-        <img src="<%= character.thumbnail.path + '.' cahracter.thumbnail.extension %>">
+      <h2><a href='#'><%= character.name %></a></h2>
+      <% if (character.thumbnail.path.split('/').pop() != 'image_not_available'){ %>
+        <img src="<%= character.thumbnail.path + '.' + character.thumbnail.extension %>"> 
       <% } %>
       <form method="POST" action="/profile">
         <input hidden type="text" name="name" value="<%= character.name %>" >
         <button class="btn btn-primary" type="submit">Add to Favorite Hero</button>
       </form>
-    </div>
+  <div class='comics'>
+    <% character.comics.items.forEach(function(comic) {%>
+        <h2><a href='#'><%= comic.name %></a></h2>
+        <form method="POST" action="/profile">
+          <input hidden type="text" name="name" value="<%= comic.title %>" >
+          <button class="btn btn-primary" type="submit">Add to Favorite Comics</button>
+        </form>
+    <% }); %>
+  </div>
   <% }); %>
+</div>
 
-  <% comics.forEach(function(comic) { %>
-    <div class="well">
-      <h2><a href='#'><%= comic.title %> </h2>
-      <% if (comic.images.length > 0) { %>
-        <img src="<%= comic.images[0].path + '.' + comic.images[0].extension %>">
-      <% } %>
-      <form method="POST" action="/profile">
-        <input hidden type="text" name="name" value="<%= comic.title %>" >
-        <button class="btn btn-primary" type="submit">Add to Favorite Comics</button>
-      </form>
-    </div>
-  <% }); %>
-
+  
 <a href="/profile">Home</a>

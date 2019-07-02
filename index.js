@@ -35,8 +35,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
-
-//app.use('/marvel', require('./routes/marvel'));
  
 //Configures the express-session middleware
 app.use(session({
@@ -76,22 +74,22 @@ app.get('/profile', isLoggedIn, function(req, res) {
   var url = buildMarvelQuery('characters');
   axios.get(url).then( function(apiResponse) {
     var characters = apiResponse.data.data.results;
-    url = buildMarvelQuery('comics')
+    url = buildMarvelQuery('comics');
     axios.get(url).then( function(apiResponse) {
       var comics = apiResponse.data.data.results;
-      console.log("this is comics:", comics[0].images);
       res.render('profile', {characters, comics});  
     }).catch( err => res.json(err));
   });
 });
+  
+  app.use('/auth', require('./controllers/auth'));  // require part contains export of a router
 
-app.use('/auth', require('./controllers/auth'));  // require part contains export of a router
+  var server = app.listen(process.env.PORT || 3000);
 
-var server = app.listen(process.env.PORT || 3000);
-
-module.exports = server;
-
-
+  module.exports = server;
+  
+  
+  
 
 
 
