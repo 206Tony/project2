@@ -1,23 +1,17 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('comics', {
+    return queryInterface.createTable('characters', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
-      },
-      comic: {
+      character: {
         type: Sequelize.STRING
       },
-      comicApiId: {
-        type: Sequelize.INTEGER
-      },
-      isbn: {
+      characterApiId: {
         type: Sequelize.INTEGER
       },
       userId: {
@@ -34,6 +28,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('comics');
+    return queryInterface.dropTable('characters');
   }
 };
