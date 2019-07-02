@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   comic.associate = function(models) {
-    // associations can be defined here
+    models.comic.belongsTo(models.user);
   };
   return comic;
 };

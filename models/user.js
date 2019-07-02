@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   user.associate = function(models) {
-    // models.user.hasMany(models.character);
-    // models.user.hasMany(models.comic);
+     models.user.hasMany(models.character);
+     models.user.hasMany(models.comic);
   };
   user.prototype.validPassword = function(passwordTyped) {
     return bcrypt.compareSync(passwordTyped, this.password);

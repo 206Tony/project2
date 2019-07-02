@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   character.associate = function(models) {
+    models.character.belongsTo(models.user);
   };
   return character;
 };

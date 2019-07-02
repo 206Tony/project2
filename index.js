@@ -42,7 +42,8 @@ app.get('/', function(req, res) {
   var url = buildMarvelQuery();
   axios.get(url).then( apiResponse => {
     var character = apiResponse.data;
-    res.render('index', {character});  
+    var comic = apiResponse.data
+    res.render('index', {character, comic});  
   }).catch( err => res.json(err))
 });
  

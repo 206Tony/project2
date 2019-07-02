@@ -4,7 +4,7 @@
 
   <% character.forEach(function(character) {
     <div class="well">
-      <h2><a href='http://gateway.marvel.com/v1/public/<%= character.name %> + <%= buildMarvelQuery > '><%= character.name %> </h2>
+      <h2><a href='http://gateway.marvel.com/v1/public/<%= characters.name %> + <%= buildMarvelQuery > '><%= characters.name %> </h2>
       <form method="POST" action="/profile">
         <input hidden type="text" name="name" value="<%= character.name %>" >
         <button class="btn btn-primary" type="submit">Add to Favorite Hero</button>
@@ -13,4 +13,4 @@
   <% }); %>
 </div> %>
 
-<a href="/">Home</a>
+<a href="/profile">Home</a>

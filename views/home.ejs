@@ -6,10 +6,10 @@
   <% characters.forEach(function(character) {
     <div class="well">
       <h2><%= character.name.toUpperCase() %></h2>
-      <form method="POST" action="/marvel">
+      <%# <form method="POST" action="/marvel">
         <input hidden type="text" name="name" value="<%= character.name %>" >
-        <button class="btn btn-primary" type="submit">Add to Favorite Hero</button>
-      </form>
+        <%# <button class="btn btn-primary" type="submit">Add to Favorite Hero</button> %>
+      <%# </form>
     </div>
   <% }); %>
-</div> %> %> 
+<%# </div> %> %>
