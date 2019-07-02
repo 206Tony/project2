@@ -5,7 +5,9 @@
   <% characters.forEach(function(character) { %>
     <div class="well">
       <h2><a href='#'><%= character.name %> </h2>
-
+      <% if (comic.images.length > 0) { %>
+        <img src="<%= character.thumbnail.path + '.' cahracter.thumbnail.extension %>">
+      <% } %>
       <form method="POST" action="/profile">
         <input hidden type="text" name="name" value="<%= character.name %>" >
         <button class="btn btn-primary" type="submit">Add to Favorite Hero</button>
