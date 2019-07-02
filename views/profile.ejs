@@ -2,15 +2,28 @@
 
 <p>Hello, <%= currentUser.name %></p>
 
-  <% character.forEach(function(character) {
+  <% characters.forEach(function(character) { %>
     <div class="well">
-      <h2><a href='http://gateway.marvel.com/v1/public/<%= characters.name %> + <%= buildMarvelQuery > '><%= characters.name %> </h2>
+      <h2><a href='#'><%= character.name %> </h2>
+
       <form method="POST" action="/profile">
         <input hidden type="text" name="name" value="<%= character.name %>" >
         <button class="btn btn-primary" type="submit">Add to Favorite Hero</button>
       </form>
     </div>
   <% }); %>
-</div> %>
+
+  <% comics.forEach(function(comic) { %>
+    <div class="well">
+      <h2><a href='#'><%= comic.title %> </h2>
+      <% if (comic.images.length > 0) { %>
+        <img src="<%= comic.images[0].path + '.' + comic.images[0].extension %>">
+      <% } %>
+      <form method="POST" action="/profile">
+        <input hidden type="text" name="name" value="<%= comic.title %>" >
+        <button class="btn btn-primary" type="submit">Add to Favorite Comics</button>
+      </form>
+    </div>
+  <% }); %>
 
 <a href="/profile">Home</a>

@@ -18,13 +18,12 @@ router.get('/', function(req, res, next) {
   });
 })
 
-
 router.get('/:id', function(req, res){
   db.character.findByPk(req.params.id).then(function(character){
     var marvelUrl = 'http://gateway.marvel.com/v1/public/characters?name=' + character.name + '&apiKey=' + PUBLIC_HERO_KEY;
     axios.get(marvelUrl).then(function(apiResponse) {
       var character = apiResponse.data;
-      res.render('character/profile', { character, id: parseInt(req.params.id) });
+      res.render('profile', { character, id: parseInt(req.params.id) });
     });
   });
 });
