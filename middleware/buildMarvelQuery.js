@@ -5,14 +5,14 @@ const privateKey = process.env.SUPER_HERO_SECRET_KEY;
 
 function buildMarvelQuery(param) {
   let baseUrl = 'http://gateway.marvel.com/v1/public/' +  param;
-  let ts = new Date();
+  let ts = md5(new Date().toString());
   let apikey = publicKey;
   let hash = md5(ts + privateKey + publicKey);
   return baseUrl + 
-         '?ts=' + ts +
+         'ts=' + ts +
          '&apikey='+ apikey +
-         '&hash=' + hash +
-         '&limit=20';
+         '&hash=' + hash
+        // + '&limit=20';
 }
 
 module.exports = buildMarvelQuery;

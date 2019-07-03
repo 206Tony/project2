@@ -11,9 +11,6 @@ module.exports = {
       character: {
         type: Sequelize.STRING
       },
-      characterApiId: {
-        type: Sequelize.INTEGER
-      },
       userId: {
         type: Sequelize.INTEGER
       },

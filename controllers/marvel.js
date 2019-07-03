@@ -1,50 +1,36 @@
-'use strict';
+// 'use strict';
+require('dotenv').config();
 const buildMarvelQuery = require('../middleware/buildMarvelQuery');
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const axios = require('axios');
-const async = require('async');
-const md5 = require('md5');
 
 router.get('/', function(req, res) {
-  db.character.findAll().then(function(character) {
-    res.render('profile', {character}); 
+  db.character.findAll().then(function(characters) {
+    res.render('marvel/favorites', {characters}); 
   });
 })
-
-router.get('/:id', function(req, res){
-  db.character.findByPk(req.params.id).then(function(character){
-    var url = 'http://gateway.marvel.com/v1/public/characters?name=' + character.name + '&apiKey=' + PUBLIC_HERO_KEY;
-    axios.get(url).then(function(apiResponse) {
-      var character = apiResponse.data;
-      res.render('profile', { character, id: parseInt(req.params.id) });
-    });
-  });
-});
 
 router.post('/', function(req, res) {
   db.character.create({
     character: req.body.character,
-    characterApi: req.body.characterApi
+    userId: req.user.id
   }).then(function() {
-    res.redirect('/profile');
+    res.redirect('/marvel');
   })
 });
 
-router.post('/', function(req, res) {
-  db.comic.create({
-    comic: req.body.comic,
-    isbn: req.body.isbn,
-    comicApi: req.body.comicApiId
-  }).then(function() {
-    res.redirect('/profile');
-  })
+router.get('/:id', function(req, res){
+  db.character.findByPk(req.params.id).then(function(character){
+    var url = buildMarvelQuery('characters?name=' + encodeURI(character.character)); //'http://gateway.marvel.com/v1/public/characters?name=' + id + "&ts="+ new Date() +'&apiKey=' + publicKey + 'hash=' + md5(ts + privateKey + publicKey);
+    axios.get(url).then(function(apiResponse) {
+      var character = apiResponse.data.data.results[0];
+      //res.json(character)
+      res.render('favorites/:id', {character, id: parseInt(req.params.id)});
+    });
+  });
 });
-
-// router.update('/:id', function(req, res, next) {
-
-// })
 
 router.delete('/:id', function(req, res) {
   db.character.destroy({

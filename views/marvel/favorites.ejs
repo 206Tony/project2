@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="text-center">My Heros</h1>
+  <p class="text-center">
+    <a href="/profile">Home</a>
+  </p>
+  <% characters.forEach(function(character) { %>
+    <div class="well">
+      <h2><a href='/marvel/<%= character.id %>'><%= character.character %></a></h2>
+      <form method="POST" action="/marvel/<%= character.id %>/?_method=DELETE">
+        <input type="submit" value="Delete" />
+      </form>
+    </div>
+  <% }); %>
+</div>

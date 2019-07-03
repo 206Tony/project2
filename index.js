@@ -72,10 +72,10 @@ app.get('/', function(req, res) {
 // });
 
 app.get('/profile', isLoggedIn, function(req, res) {
-  var url = buildMarvelQuery('characters');
+  var url = buildMarvelQuery('characters?');
   axios.get(url).then( function(apiResponse) {
     var characters = apiResponse.data.data.results;
-    url = buildMarvelQuery('comics');
+    url = buildMarvelQuery('comics?');
     axios.get(url).then( function(apiResponse) {
       var comics = apiResponse.data.data.results;
       res.render('profile', {characters, comics});  
