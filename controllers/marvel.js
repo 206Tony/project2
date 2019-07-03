@@ -1,6 +1,5 @@
 'use strict';
-require('dotenv').config();
-const buildMarvelQuery = require('./middleware/buildMarvelQuery');
+const buildMarvelQuery = require('../middleware/buildMarvelQuery');
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
@@ -8,11 +7,9 @@ const axios = require('axios');
 const async = require('async');
 const md5 = require('md5');
 
-
-
-router.get('/', function(req, res, next) {
-  db.character.findAll().then(function(characters) {
-    res.render('character/favorites', {characters}); 
+router.get('/', function(req, res) {
+  db.character.findAll().then(function(character) {
+    res.render('profile', {character}); 
   });
 })
 
@@ -28,9 +25,20 @@ router.get('/:id', function(req, res){
 
 router.post('/', function(req, res) {
   db.character.create({
-    name: req.body.name
+    character: req.body.character,
+    characterApi: req.body.characterApi
   }).then(function() {
-    res.redirect('profile');
+    res.redirect('/profile');
+  })
+});
+
+router.post('/', function(req, res) {
+  db.comic.create({
+    comic: req.body.comic,
+    isbn: req.body.isbn,
+    comicApi: req.body.comicApiId
+  }).then(function() {
+    res.redirect('/profile');
   })
 });
 
@@ -38,14 +46,14 @@ router.post('/', function(req, res) {
 
 // })
 
-// router.delete('/:id', function(req, res) {
-//   db.character.destroy({
-//     where: {id: parseInt(req.params.id)}
-//   }).then(function(character){
+router.delete('/:id', function(req, res) {
+  db.character.destroy({
+    where: {id: parseInt(req.params.id)}
+  }).then(function(character){
 
-//     res.redirect('/profile');
-//   });   
-// });
+    res.redirect('/profile');
+  });   
+});
 
 module.exports = router;
 

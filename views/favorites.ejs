@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="text-center">My Favorite Heros</h1>
+  <p class="text-center">
+    <a href="/">Home</a>
+  </p>
+  <% characters.forEach(function(character) { %>
+    <div class="well">
+      <h2><a href='/marvel/<%= character.id %>'><%= character.name %></a></h2> 
+    </div>
+  <% }); %>
+</div>

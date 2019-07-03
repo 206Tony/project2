@@ -1,0 +1,14 @@
+.character, .comic {
+  display: inline;
+  font-size: 20px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+.comics {
+  display: inline;
+  font-size: 14px;
+}

@@ -17,6 +17,7 @@ const helmet = require('helmet');
 //this is only used by session store
 const db = require('./models');
 const buildMarvelQuery = require('./middleware/buildMarvelQuery');
+
 const app = express();
 
 //This line makes the session use sequelize to write session data to postgres table
@@ -82,12 +83,13 @@ app.get('/profile', isLoggedIn, function(req, res) {
   });
 });
   
-  app.use('/auth', require('./controllers/auth'));  // require part contains export of a router
+app.use('/auth', require('./controllers/auth'));  // require part contains export of a router
+app.use('/marvel', require('./controllers/marvel'));
 
-  var server = app.listen(process.env.PORT || 3000);
+var server = app.listen(process.env.PORT || 3000);
 
-  module.exports = server;
-  
+module.exports = server;
+
   
   
 

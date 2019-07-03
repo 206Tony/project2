@@ -1,28 +1,34 @@
-<h2>Profile Page</h2>
-
 <p>Hello, <%= currentUser.name %></p>
 
-<div class="characters">
+<div class="character">
   <% characters.forEach(function(character) { %>
       <h2><a href='#'><%= character.name %></a></h2>
       <% if (character.thumbnail.path.split('/').pop() != 'image_not_available'){ %>
         <img src="<%= character.thumbnail.path + '.' + character.thumbnail.extension %>"> 
       <% } %>
-      <form method="POST" action="/profile">
-        <input hidden type="text" name="name" value="<%= character.name %>" >
-        <button class="btn btn-primary" type="submit">Add to Favorite Hero</button>
+      <form method="POST" action="/marvel">
+        <input hidden type="text" name="character" value="<%= character.name %>" >
+        <button class="btn btn-primary" type="submit">Add Character to Favorites</button>
       </form>
-  <div class='comics'>
+  <div class='comic'>
     <% character.comics.items.forEach(function(comic) {%>
         <h2><a href='#'><%= comic.name %></a></h2>
-        <form method="POST" action="/profile">
-          <input hidden type="text" name="name" value="<%= comic.title %>" >
-          <button class="btn btn-primary" type="submit">Add to Favorite Comics</button>
+        <form method="POST" action="/marvel">
+          <input hidden type="text" name="comic" value="<%= comic.title %>" >
+          <button class="btn btn-primary" type="submit">Add Comics to Favorite </button>
         </form>
     <% }); %>
   </div>
   <% }); %>
 </div>
 
-  
-<a href="/profile">Home</a>
+<div class='comics'>
+    <% comics.forEach(function(comic) {%>
+        <h2><a href='#'><%= comic.title %></a></h2>
+        <img src="<%= comic.thumbnail.path + '.' + comic.thumbnail.extension %> ">
+        <form method="POST" action="/marvel">
+          <input hidden type="text" name="name" value="<%= comic.title %>" >
+          <button class="btn btn-primary" type="submit">Add to Favorites</button>
+        </form>
+    <% }); %>
+</div>
