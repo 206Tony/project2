@@ -7,8 +7,8 @@ const db = require('../models');
 const axios = require('axios');
 
 router.get('/', function(req, res) {
-  db.character.findAll().then(function(characters) {
-    res.render('marvel/favorites', {characters}); 
+  db.character.findAll().then(function(character) {
+    res.render('marvel/favorites', {character}); 
   });
 })
 
@@ -21,13 +21,34 @@ router.post('/', function(req, res) {
   })
 });
 
+router.post('/', function(req, res) {
+  db.comic.create({
+    title: req.body.title,
+    userId: req.user.id
+  }).then(function() {
+    res.redirect('/marvel');
+  })
+});
+
+router.get('/show/:id', function(req, res) {
+  db.character.findAll().then(function(character, comic){
+    res.render("marvel/show", {character, comic})
+  })
+})
+
+router.get('favorites', function(req, res) {
+  db.character.findAll().then(function(character){
+    res.render("marvel/favorites", {character, comic})
+  })
+})
+
 router.get('/:id', function(req, res){
   db.character.findByPk(req.params.id).then(function(character){
-    var url = buildMarvelQuery('characters?name=' + encodeURI(character.character)); //'http://gateway.marvel.com/v1/public/characters?name=' + id + "&ts="+ new Date() +'&apiKey=' + publicKey + 'hash=' + md5(ts + privateKey + publicKey);
+    var url = buildMarvelQuery('characters?name=' + encodeURI(character.character.name)); //'http://gateway.marvel.com/v1/public/characters?name=' + id + "&ts="+ new Date() +'&apiKey=' + publicKey + 'hash=' + md5(ts + privateKey + publicKey);
     axios.get(url).then(function(apiResponse) {
-      var character = apiResponse.data.data.results[0];
+      var character = apiResponse.data.data.results[1];
       //res.json(character)
-      res.render('favorites/:id', {character, id: parseInt(req.params.id)});
+      res.render('marvel/show', {character, id: parseInt(req.params.id)});
     });
   });
 });
@@ -37,7 +58,7 @@ router.delete('/:id', function(req, res) {
     where: {id: parseInt(req.params.id)}
   }).then(function(character){
 
-    res.redirect('/profile');
+    res.redirect('/profile', {character, comics});
   });   
 });
 

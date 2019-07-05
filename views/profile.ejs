@@ -1,9 +1,10 @@
 <p>Hello, <%= currentUser.name %></p>
-<a href="/marvel">Favorite Heros and Comics</a>
-
+  <form method="GET" action="/marvel/show">
+    <button class="btn btn-primary" type="submit">Go to show</button>
+  </form>
 <div class="character">
   <% characters.forEach(function(character) { %>
-      <h2><a href='#'><%= character.name %></a></h2>
+      <h2><a href='#'><%= character.character %></a></h2>
       <% if (character.thumbnail.path.split('/').pop() != 'image_not_available'){ %>
         <img src="<%= character.thumbnail.path + '.' + character.thumbnail.extension %>"> 
       <% } %>
@@ -23,4 +24,3 @@
   </div>
   <% }); %>
 </div>
-

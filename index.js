@@ -28,7 +28,6 @@ const sessionStore = new SequelizeStore({
   expiration: 1000 * 60 * 30
 });
 
-
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
@@ -74,11 +73,11 @@ app.get('/', function(req, res) {
 app.get('/profile', isLoggedIn, function(req, res) {
   var url = buildMarvelQuery('characters?');
   axios.get(url).then( function(apiResponse) {
-    var characters = apiResponse.data.data.results;
+    var characters = apiResponse.data.data.results[0];
     url = buildMarvelQuery('comics?');
     axios.get(url).then( function(apiResponse) {
       var comics = apiResponse.data.data.results;
-      res.render('profile', {characters, comics});  
+    res.render('profile', {characters, comics});  
     }).catch( err => res.json(err));
   });
 });

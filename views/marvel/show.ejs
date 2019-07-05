@@ -1,11 +1,13 @@
   <h1 class="text-center">My Favorite Heros</h1>
   <p class="text-center">
-    <a href="/marvel">Favorites</a> | <a href="/profile">Home</a>
+    <a href="/marvel/favorites">Favorites</a> | <a href="/profile">Home</a>
   </p>
-  
+    
     <div class="well">
-      <h2><%= character.character %></h2> 
-      <h4><%= character.description %></h4>
-      <h4><%= character.comics %></h4>
-      
+      <h2><%= character.name %>1</h2> 
+      <h4><%= character.description %>2</h4>
+      <h4><%= comic.title %>3</h4>
+      <form method="POST" action="/marvel/show<%= character.id %>/?_method=DELETE">
+        <input type="submit" value="Delete" />
+      </form>
     </div>
