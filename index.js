@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 const db = require('./models');
+const methodOverride = require('method-override');
 const buildMarvelQuery = require('./middleware/buildMarvelQuery');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
+app.use(methodOverride('_method'));
  
 //Configures the express-session middleware
 app.use(session({

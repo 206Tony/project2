@@ -4,7 +4,8 @@
     <a href="/main">Home</a>
   </p>
   <% character.forEach(function(character) { %>
-  <form action="/marvel/favorites" method='GET'>
+  <form action="/favorites" method='POST'>
+  <input hidden type="text" name="name" value="<%= character.character %>" >
   </form>
     <div class="well">
       <h2><a href='/marvel/<%= character.id %>'><%= character.character %></a></h2>
