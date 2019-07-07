@@ -1,0 +1,9 @@
+<div class='comic'>
+  <% character.comics.items.forEach(function(comic) {%>
+    <h2><a href='#'><%= comic.name %></a></h2>
+    <form method="GET" action="/marvel">
+      <input hidden type="text" name="comic" value="<%= comic.name %>" >
+      <button class="btn btn-primary" type="submit">Add Comics to Favorite </button>
+    </form>
+  <% }); %>
+</div>

@@ -1,0 +1,13 @@
+<p>Hello, <%= currentUser.name %></p>
+  <form method="GET" action="/marvel/">
+    <button class="btn btn-primary" type="submit">All my Favorites</button>
+  </form>
+<div class="character">
+  <% characters.forEach(function(character) { %>
+    <h2><a href='/marvel/'><%= character.name %></a></h2>
+    <form method="POST" action="/marvel/">
+      <input hidden type="text" name="name" value="<%= character.character %>" >
+  </form>
+  <% }); %>
+</div>
+

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   character.associate = function(models) {
     models.character.belongsTo(models.user);
-    models.character.belongsToMany(models.comic, {through:charactersComics});
+    
   };
   return character;
 };

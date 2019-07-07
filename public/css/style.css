@@ -1,6 +1,7 @@
 .character {
   height: 100;
-  width: 100px;
+  background-color: black;
+  text-align: center;
 }
 
 img {
@@ -13,10 +14,17 @@ img {
   font-size: 14px;
 }
 
-.well {
+.show {
+  color: black;
+  text-align: center;
+  height: 30px;
+  width: 100%;
+}
+
+/* .well {
   display: inline-block;
   height: 400;
   width: auto;
-}
+} */
 
 

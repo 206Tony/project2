@@ -1,11 +1,13 @@
 <div class="container">
   <h1 class="text-center">My Heros</h1>
   <p class="text-center">
-    <a href="/profile">Home</a>
+    <a href="/main">Home</a>
   </p>
   <% character.forEach(function(character) { %>
+  <form action="/marvel/favorites" method='GET'>
+  </form>
     <div class="well">
-      <h2><a href='/marvel/show<%= character.id %>'><%= character.character %></a></h2>
+      <h2><a href='/marvel/<%= character.id %>'><%= character.character %></a></h2>
     </div>
   <% }); %>
 </div>

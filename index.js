@@ -1,20 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
-//Calls API
+const pages = require('express-paginate');
 const axios = require('axios');
-const async = require('async');
-//Hash generator
 const md5 = require('md5');
-//Module allows use of sessions
 const session = require('express-session');
-//import passport local strategy
 const passport = require('./config/passportConfig');
-//modules for flash messages
 const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
-//this is only used by session store
 const db = require('./models');
 const buildMarvelQuery = require('./middleware/buildMarvelQuery');
 
@@ -66,33 +60,67 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-// app.get('/profile', isLoggedIn, function(req, res) {
-//   res.render('profile');
+// app.get('/main', isLoggedIn, function(req, res) {
+//   res.render('main');
 // });
 
-app.get('/profile', isLoggedIn, function(req, res) {
+app.get('/main', isLoggedIn, function(req, res) {
   var url = buildMarvelQuery('characters?');
   axios.get(url).then( function(apiResponse) {
-    var characters = apiResponse.data.data.results[0];
+    var characters = apiResponse.data.data.results;
     url = buildMarvelQuery('comics?');
     axios.get(url).then( function(apiResponse) {
       var comics = apiResponse.data.data.results;
-    res.render('profile', {characters, comics});  
+    res.render('main', {characters, comics});  
     }).catch( err => res.json(err));
   });
 });
-  
-app.use('/auth', require('./controllers/auth'));  // require part contains export of a router
-app.use('/marvel', require('./controllers/marvel'));
+
+app.use('/auth', require('./routes/auth'));  // require part contains export of a router
+app.use('/marvel', require('./routes/marvel'));
 
 var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
 
-  
+
+// app.get('/main', (req, res) => {
+//   const pageCount = Math.ceil(posts.length / 20);
+//   let page = parseInt(req.query.character);
+//   if (!page) { page = 1;}
+//   if (page > pageCount) {
+//     page = pageCount
+//   }
+//   res.json({
+//     "page": page,
+//     "pageCount": pageCount,
+//     "character": posts.slice(page * 10 - 10, page * 10)
+//   });
+// });
   
 
-
+// router.get('/', function(req, res, next) {
+//   var result = req.models.products.count({
+//   }, function(error, productsCount){
+//       if(error) throw error;
+//        totalRec      = productsCount;
+//         pageCount     =  Math.ceil(totalRec /  pageSize);
+  
+//       if (typeof req.query.page !== 'undefined') {
+//             currentPage = req.query.page;
+//    }
+    
+//      if(currentPage >1){
+     
+//        start = (currentPage - 1) * pageSize;
+//     }
+    
+//     var result = req.models.products.find({},{limit: pageSize, offset: start}, function(error, products){ 
+//         if(error) throw error;
+//         res.render('index', { data: products, pageSize: pageSize, pageCount: pageCount,currentPage: currentPage});
+//     });
+//   });
+// });
 
 
 
