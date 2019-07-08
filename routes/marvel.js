@@ -60,13 +60,13 @@ router.get('/:id', function(req, res){
   });
 });
 
-router.delete('/:id', function(req, res) {
+router.delete('/favorites/:id', function(req, res) {
   console.log(" here ")
   db.character.destroy({
     where: {id: parseInt(req.params.id)}
   }).then(function(character){
 
-    res.redirect('/marvel');
+    res.redirect('/favorites', {character});
   });   
 });
 

@@ -8,14 +8,10 @@
 <div>
   <% character.forEach(function(character) {%>
     <p><%= character.character %></p> 
-  <% }); %>
-  <form method="POST" action="/marvel/<%= character.name %>/?_method=DELETE">
+  <form method="POST" action="/marvel/<%= character.id %>/?_method=DELETE">
     <input type="submit" value="Delete" />
   </form>
-</div>
- 
-<div class="show">
-  
+  <% }); %>
 </div>
 
 
