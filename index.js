@@ -73,9 +73,23 @@ app.get('/main', isLoggedIn, function(req, res) {
     url = buildMarvelQuery('comics?');
     axios.get(url).then( function(apiResponse) {
       var comics = apiResponse.data.data.results;
-    res.render('main', {characters, comics});  
+      res.render('main', {characters, comics});  
     }).catch( err => res.json(err));
   });
+});
+
+app.post('/show', function(req, res) {
+  var url = buildMarvelQuery('characters?name=');
+  axios.get(url).then( function(apiResponse) {
+    var character = apiResponse.data.data.results[{name}]; 
+    res.render('show', {character});
+  });
+});
+
+app.all(pages, function(req, res, next) {
+  // set default or minimum is 10 (as it was prior to v0.2.0)
+  if (req.query.limit <= 10) req.query.limit = 10;
+  next();
 });
 
 app.use('/auth', require('./routes/auth'));  // require part contains export of a router

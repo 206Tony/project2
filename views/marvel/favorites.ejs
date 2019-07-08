@@ -1,14 +1,27 @@
+
+
 <div class="container">
-  <h1 class="text-center">My Heros</h1>
+  <h1 class="text-center">My Favorite Heros</h1>
   <p class="text-center">
-    <a href="/main">Home</a>
+    <a href="/">Home</a>
   </p>
   <% character.forEach(function(character) { %>
-  <form action="/favorites" method='POST'>
-  <input hidden type="text" name="name" value="<%= character.character %>" >
-  </form>
     <div class="well">
-      <h2><a href='/marvel/<%= character.id %>'><%= character.character %></a></h2>
+      <h2><a href='/marvel/<%= character.id %>'><%= character.character.id %></a></h2> 
     </div>
+    <div class="show">
+   <% characters.forEach(function(character) {%>
+      <p><%= character.character.apiResponse.data.data.Results[1] %>1</p> 
+      <h4><%= character.description %>2</h4>
+      <h3><%= character.comics %>3</h3>
+
+    <div>
+      <form method="POST" action="/marvel/favorites<%= character.character %>/?_method=DELETE">
+        <input type="submit" value="Delete" />
+      </form>
+    </div>
+    <% }); %>
   <% }); %>
 </div>
+
+

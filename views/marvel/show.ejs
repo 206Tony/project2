@@ -2,21 +2,20 @@
   <h1 class="text-center">My Favorite Heros</h1>
   
   <p class="text-center">
-    <a href="/marvel/">Favorites</a> | <a href="/main">Home</a>
+    <a href="/marvel/favorites">Favorites</a> | <a href="/main">Home</a>
   </p>
       
   <div class="show">
-    <% character.forEach(function(characters) { %>
-      <p><%= characters.character %>1</p> 
-      <h4><%= characters.description %>2</h4>
-      <h3><%= characters.comics %>3</h3>
+      <p><%= character.name %></p> 
+      <img src="<%= character.thumbnail.encodedURI('path' + "." + 'extension') %>" alt=" <%=character.name %>">
+      <h4><%= character.description %></h4>
+      <h3><%= character.comics.items.name %>3</h3>
 
     <div>
-      <form method="POST" action="/favorites<%= character.id %>/?_method=DELETE">
+      <form method="POST" action="/marvel/<%= character.character %>">
         <input type="submit" value="delete" />
       </form>
     </div>
-      <% }) %>
   </div>
 
-</div>
+
