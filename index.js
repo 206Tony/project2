@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
-const pages = require('express-paginate');
 const axios = require('axios');
 const md5 = require('md5');
 const session = require('express-session');
@@ -74,76 +73,11 @@ app.get('/main', isLoggedIn, function(req, res) {
   });
 });
 
-app.all(pages, function(req, res, next) {
-  // set default or minimum is 10 (as it was prior to v0.2.0)
-  if (req.query.limit <= 10) req.query.limit = 10;
-  next();
-});
-
 app.use('/auth', require('./routes/auth'));  // require part contains export of a router
 app.use('/marvel', require('./routes/marvel'));
 
 var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
-
-
-// app.get('/main', (req, res) => {
-//   const pageCount = Math.ceil(posts.length / 20);
-//   let page = parseInt(req.query.character);
-//   if (!page) { page = 1;}
-//   if (page > pageCount) {
-//     page = pageCount
-//   }
-//   res.json({
-//     "page": page,
-//     "pageCount": pageCount,
-//     "character": posts.slice(page * 10 - 10, page * 10)
-//   });
-// });
-  
-
-// router.get('/', function(req, res, next) {
-//   var result = req.models.products.count({
-//   }, function(error, productsCount){
-//       if(error) throw error;
-//        totalRec      = productsCount;
-//         pageCount     =  Math.ceil(totalRec /  pageSize);
-  
-//       if (typeof req.query.page !== 'undefined') {
-//             currentPage = req.query.page;
-//    }
-    
-//      if(currentPage >1){
-     
-//        start = (currentPage - 1) * pageSize;
-//     }
-    
-//     var result = req.models.products.find({},{limit: pageSize, offset: start}, function(error, products){ 
-//         if(error) throw error;
-//         res.render('index', { data: products, pageSize: pageSize, pageCount: pageCount,currentPage: currentPage});
-//     });
-//   });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

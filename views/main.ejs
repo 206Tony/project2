@@ -1,6 +1,9 @@
 <p>Hello, <%= currentUser.name %></p>
-  <form method="post" action="/marvel/favorites/">
+  <form method="POST" action="/marvel/favorites/">
     <button class="btn btn-primary" type="submit">All my Favorites</button>
+  </form>
+  <form method="GET" action="/auth/logout"">
+    <button class="btn btn-primary" type="submit">Log Out</button>
   </form>
 <div class="character">
   <% characters.forEach(function(character) { %>
