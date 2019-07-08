@@ -78,14 +78,6 @@ app.get('/main', isLoggedIn, function(req, res) {
   });
 });
 
-app.post('/show', function(req, res) {
-  var url = buildMarvelQuery('characters?name=');
-  axios.get(url).then( function(apiResponse) {
-    var character = apiResponse.data.data.results[{name}]; 
-    res.render('show', {character});
-  });
-});
-
 app.all(pages, function(req, res, next) {
   // set default or minimum is 10 (as it was prior to v0.2.0)
   if (req.query.limit <= 10) req.query.limit = 10;

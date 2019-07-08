@@ -4,18 +4,22 @@
   <p class="text-center">
     <a href="/marvel/favorites">Favorites</a> | <a href="/main">Home</a>
   </p>
+  <div>
+    <form method="POST" action="/marvel/favorites<%= character.character %>">
+      <input type="submit" value="Add to Favorites" >
+    </form>
+  </div>
       
   <div class="show">
       <p><%= character.name %></p> 
-      <img src="<%= character.thumbnail.encodedURI('path' + "." + 'extension') %>" alt=" <%=character.name %>">
+      <% if (character.thumbnail.path.split('/').pop() != 'image_not_available'){ %>
+        <img src="<%= character.thumbnail.path + '.' + character.thumbnail.extension %>" alt=" <%=character.name %>"> 
+      <% } %>
       <h4><%= character.description %></h4>
-      <h3><%= character.comics.items.name %>3</h3>
+      <% character.comics.items.map(function(items, i) { %>
+        <h3><%= character.comics.items[i].name %>3</h3>
+      <%});%>
 
-    <div>
-      <form method="POST" action="/marvel/<%= character.character %>">
-        <input type="submit" value="delete" />
-      </form>
-    </div>
   </div>
 
 
