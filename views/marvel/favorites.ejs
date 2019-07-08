@@ -3,23 +3,20 @@
   <p class="text-center">
     <a href="/main">Home</a>
   </p>
-
-  <div>
-    <form method="POST" action="/marvel/favorites<%= character.character %>/?_method=DELETE">
-      <input type="submit" value="Delete" />
-    </form>
-  </div>
- 
-  <div class="show">
-    <p><%= character.name %></p> 
-    <% if (character.thumbnail.path.split('/').pop() != 'image_not_available'){ %>
-      <img src="<%= character.thumbnail.path + '.' + character.thumbnail.extension %>" alt=" <%=character.name %>"> 
-    <% } %>
-    <h4><%= character.description %></h4>
-    <% character.comics.items.map(function(items, i) { %>
-      <h3><%= character.comics.items[i].name %>3</h3>
-    <%});%>
-  </div>
 </div>
+
+<div>
+  <% character.forEach(function(character) {%>
+    <p><%= character.character %></p> 
+  <% }); %>
+  <form method="POST" action="/marvel/<%= character.name %>/?_method=DELETE">
+    <input type="submit" value="Delete" />
+  </form>
+</div>
+ 
+<div class="show">
+  
+</div>
+
 
 

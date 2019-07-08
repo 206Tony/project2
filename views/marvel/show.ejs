@@ -5,8 +5,10 @@
     <a href="/marvel/favorites">Favorites</a> | <a href="/main">Home</a>
   </p>
   <div>
-    <form method="POST" action="/marvel/favorites<%= character.character %>">
-      <input type="submit" value="Add to Favorites" >
+    <form method="POST" action="/marvel/favorites">
+    <input type="hidden" name="character" value="<%=character.name%>">
+    <button class="btn btn-primary" value="character" type="submit">Add to Favorites</button>
+      
     </form>
   </div>
       
@@ -17,7 +19,7 @@
       <% } %>
       <h4><%= character.description %></h4>
       <% character.comics.items.map(function(items, i) { %>
-        <h3><%= character.comics.items[i].name %>3</h3>
+        <h3><%= character.comics.items[i].name %></h3>
       <%});%>
 
   </div>
