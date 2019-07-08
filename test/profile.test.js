@@ -10,9 +10,9 @@ before(function(done) {
   });
 });
 
-describe('GET /profile', function() {
+describe('GET /main', function() {
   it('should redirect to /auth/login if not logged in', function(done) {
-    request(app).get('/profile')
+    request(app).get('/main')
     .expect('Location', '/auth/login')
     .expect(302, done);
   });
@@ -33,7 +33,7 @@ describe('GET /profile', function() {
       } else {
         agent.saveCookies(res);
 
-        agent.get('/profile')
+        agent.get('/main')
         .expect(200, done);
       }
     });

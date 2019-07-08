@@ -62,10 +62,6 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-// app.get('/main', isLoggedIn, function(req, res) {
-//   res.render('main');
-// });
-
 app.get('/main', isLoggedIn, function(req, res) {
   var url = buildMarvelQuery('characters?');
   axios.get(url).then( function(apiResponse) {
