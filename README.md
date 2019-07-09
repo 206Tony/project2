@@ -115,7 +115,7 @@ module.exports = router;
 #### DB Diagram
 
 [Database](https://dbdiagram.io/d)
-![alt text](public/img/Screen Shot 2019-07-09 at 8.28.04 AM.png)
+![alt text](public/img/db.png)
 
 
 ####Middleware
