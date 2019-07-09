@@ -119,7 +119,9 @@ module.exports = router;
 
 
 ####Middleware
-
+#Created this middleware to be able to access the necessary information that I wanted the user to be able to get
+#For the marvel API I had to use there base url + the param + timestamp + apiKey (publicKey) + hash
+#hash needed md5 because you had to hash the timestamp + privateKey + publicKey 
 
 ```
 require('dotenv').config();
