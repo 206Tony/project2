@@ -29,13 +29,7 @@ router.post('/favorites', function(req, res) {
       userId: req.user.id
     }
   }).spread(function(character, created){
-      if (character) {
-        console.log('character found')
-    } else {
-        console.log('character created')
-    }
-  }).then(function() {
-    res.redirect('/marvel/favorites', {character});
+      res.redirect('/marvel/favorites', {character});
   });
 });
 
