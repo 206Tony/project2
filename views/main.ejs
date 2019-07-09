@@ -1,22 +1,8 @@
 <p>Hello, <%= currentUser.name %></p>
-  <form method="POST" action="/marvel/favorites/">
-    <button class="btn btn-primary" type="submit">All my Favorites</button>
-  </form>
-  <form method="GET" action="/auth/logout"">
-    <button class="btn btn-primary" type="submit">Log Out</button>
-  </form>
-
-  <form action="">
-    <fieldset>
-      <legend>Search For Your Favorite Marvel Character</legend>
-        <label for="hero">Search by Name: </label>
-        <input type="text" name="character" id='hero'><br>
-        <input type='submit' id='submit'>
-    </fieldset>
-  
-  
-  </form>
-    
+<div class='links'>
+  <a href="/marvel/favorites/">Favorites</a><br />
+  <a href="/auth/logout">Logout</a>
+</div>
 <div class="character">
   <% characters.forEach(function(character) { %>
     <form method="POST" action="/marvel/">

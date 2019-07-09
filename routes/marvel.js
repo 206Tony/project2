@@ -35,12 +35,16 @@ router.post('/favorites', function(req, res) {
         console.log('character created')
     }
   }).then(function() {
-    res.redirect('/marvel/favorites');
+    res.redirect('/marvel/favorites', {character});
   });
 });
 
 router.get('/favorites', function(req, res) {
-  db.character.findAll().then(function(character) {
+  db.character.findAll({
+    where: {
+      userId: req.user.id
+    }
+  }).then(function(character) {
     res.render('marvel/favorites', {character});
   });
 });
@@ -62,11 +66,9 @@ router.get('/favorites/:id', function(req, res){
 });
 
 router.delete('/favorites/:id', function(req, res) {
-  console.log(" here ")
   db.character.destroy({
     where: {id: parseInt(req.params.id)}
-  }).then(function(character){
-
+  }).then(function(character) {
     res.redirect('/marvel/favorites');
   });   
 });
