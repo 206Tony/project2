@@ -45,6 +45,12 @@ router.get('/favorites', function(req, res) {
   });
 });
 
+router.get('/show', function(req, res) {
+  db.character.findOne().then(function(character) {
+    res.redirect('/show', {character});
+  });
+});
+
 router.get('/favorites/:id', function(req, res){
   db.character.findByPk(req.params.id).then(function(character){
     var url = buildMarvelQuery('characters?name=' + encodeURI(character.name)); 

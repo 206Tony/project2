@@ -5,11 +5,23 @@
   <form method="GET" action="/auth/logout"">
     <button class="btn btn-primary" type="submit">Log Out</button>
   </form>
+
+  <form action="">
+    <fieldset>
+      <legend>Search For Your Favorite Marvel Character</legend>
+        <label for="hero">Search by Name: </label>
+        <input type="text" name="character" id='hero'><br>
+        <input type='submit' id='submit'>
+    </fieldset>
+  
+  
+  </form>
+    
 <div class="character">
   <% characters.forEach(function(character) { %>
     <form method="POST" action="/marvel/">
       <h2><a href='/marvel/show/<%= encodeURI(character.name) %>'><%= character.name %></a></h2>
-    </form>
+   </form>
   <% }); %>
 </div>
 

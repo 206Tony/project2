@@ -19,6 +19,12 @@ img {
   text-align: center;
   height: 30px;
   width: 100%;
+  color: #FFF;
+  text-align: right;
+  line-height: 60px;
+  padding: 1.1rem 1.5rem 0 .5rem;
+  vertical-align: bottom;
+  white-space: nowrap;
 }
 
 /* .well {
