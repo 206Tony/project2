@@ -30,9 +30,7 @@ Axios pulled the data from the API
 
 #### Routes
 
-Created a marvel folder to hold all the necessary routes. 
-
-
+**Created a marvel folder to hold all the necessary routes.** 
 **This is the route that that imports the API by character to the show page** 
 
 ```
