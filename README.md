@@ -33,7 +33,7 @@ Axios pulled the data from the API
 Created a marvel folder to hold all the necessary routes. 
 
 
-#This is the route that that imports the API by character to the show page 
+**This is the route that that imports the API by character to the show page** 
 
 ```
 router.get('/show/:characterName', function(req, res) {
@@ -45,7 +45,7 @@ router.get('/show/:characterName', function(req, res) {
   }).catch( err => console.log(err));
 });
 ```
-#Post route is posting one instance of that favorite hero to your favorites page with the user specific Id
+**Post route is posting one instance of that favorite hero to your favorites page with the user specific Id**
 
 ```
 router.post('/favorites', function(req, res) {
@@ -65,7 +65,7 @@ router.post('/favorites', function(req, res) {
   });
 });
 ```
-#Route is users favorite page that allows you to view your favorites
+**Route is users favorite page that allows you to view your favorites**
 ```
 router.get('/favorites', function(req, res) {
   db.character.findAll({
@@ -77,7 +77,7 @@ router.get('/favorites', function(req, res) {
   });
 });
 ```
-#Route shows individual character information
+**Route shows individual character information**
 ```
 router.get('/show', function(req, res) {
   db.character.findOne().then(function(character) {
@@ -85,7 +85,7 @@ router.get('/show', function(req, res) {
   });
 });
 ```
-#Route allows user to view character information through the show page
+**Route allows user to view character information through the show page**
 ```
 router.get('/favorites/:id', function(req, res){
   db.character.findByPk(req.params.id).then(function(character){
@@ -97,7 +97,7 @@ router.get('/favorites/:id', function(req, res){
   });
 });
 ```
-#Route Deletes characters from users favorites
+**Route Deletes characters from users favorites**
 ```
 router.delete('/favorites/:id', function(req, res) {
   db.character.destroy({
@@ -107,7 +107,7 @@ router.delete('/favorites/:id', function(req, res) {
   });   
 });
 ```
-#Exports module the index.js page
+**Exports module the index.js page**
 ```
 module.exports = router;
 ```
@@ -119,9 +119,9 @@ module.exports = router;
 
 
 ####Middleware
-#Created this middleware to be able to access the necessary information that I wanted the user to be able to get
-#For the marvel API I had to use there base url + the param + timestamp + apiKey (publicKey) + hash
-#hash needed md5 because you had to hash the timestamp + privateKey + publicKey 
+**Created this middleware to be able to access the necessary information that I wanted the user to be able to get**
+**For the marvel API I had to use there base url + the param + timestamp + apiKey (publicKey) + hash**
+**hash needed md5 because you had to hash the timestamp + privateKey + publicKey** 
 
 ```
 require('dotenv').config();
