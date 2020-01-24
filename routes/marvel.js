@@ -13,6 +13,16 @@ router.get('/', function(req, res) {
   });
 });
 
+// router.get('/show/:next', function(req, res) {
+//   console.log(req.params.characterName)
+//   var next = buildMarvelQuery('characters?name=' + encodeURI(req.params.characterName) + '&limit=' + 20);
+//   axios.get(next).then(function(apiResponse) {
+//     var character = apiResponse.data.data.results[0]; 
+//   character.findAll().then(function(character) {
+//     res.render('marvel/show', {character});
+//   }).catch( err => console.log(err));
+// });
+
 router.get('/show/:characterName', function(req, res) {
   console.log(req.params.characterName)
   var url = buildMarvelQuery('characters?name=' + encodeURI(req.params.characterName) + '&'); 

@@ -1,7 +1,20 @@
 <p>Hello, <%= currentUser.name %></p>
 <div class='links'>
   <a href="/marvel/favorites/">Favorites</a><br />
-  <a href="/auth/logout">Logout</a>
+  <a href="/auth/logout">Logout</a><br />
+</div>
+
+<div>
+  <!-- <% characters.forEach(function(character) { %>
+    <form method="POST" action="/marvel/show/next/">
+      <input type="button" name="next" value="<%=character.name%>"> 
+        <h2><a href='/marvel/show/next<%= encodeURI(character.name + 20) %>'><%= character.name %></a></h2>
+      </form>
+    <% }); %> -->
+    <input type="button" id="first" value="first" />
+    <input type="button" id="next" value="next" />
+    <input type="button" id="previous" value="previous" />
+    <input type="button" id="last" value="last" />
 </div>
 <div class="character">
   <% characters.forEach(function(character) { %>

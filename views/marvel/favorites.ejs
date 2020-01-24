@@ -4,7 +4,7 @@
     <a href="/main">Home</a>
   </p>
 </div>
-<div>
+<div id="favhero">
   <% character.forEach(function(character) {%>
     <h2><a href='/marvel/show/<%= character.character %>'><%= character.character %></a></h2>
   <form method="POST" action="/marvel/favorites/<%= character.id %>/?_method=DELETE">
